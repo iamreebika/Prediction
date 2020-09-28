@@ -89,11 +89,13 @@
 </div>
 
     <script>
+    var crop_url = '{{crop_url}}';
+
     $(document).on('submit', '#post-form',function(e){
         e.preventDefault();
         $.ajax({
             type:'POST',
-            url:'{% url "Crop1 :submit_prediction1" %}',
+            url:'{% url "crop_url" %}',
             data:{
                 Temperature:$('#Temperature').val(),
                 Humidity:$('#Humidity').val(),
