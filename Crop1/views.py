@@ -5,9 +5,10 @@ from .models import CropResults
 
 
 
-
 def index(request):
     context={'name':'Crop'}
+    # return HttpResponseRedirect(reverse("Crop1:submit_prediction"))
+    context.update({'crop_url': reverse("Crop1:submit_prediction")})
     return render(request,'Crop1/index.html',context)
 
 
