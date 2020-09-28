@@ -1,0 +1,40 @@
+{% extends "master/base.html" %}
+
+
+{% block main %}
+    <div class="container pt-5">
+        <div class="row">
+
+        <h1> Crop Prediction Results:</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                <th scope="col">#</th>
+                      <th scope="col">Temperature</th>
+                <th scope="col">Humidity</th>
+                <th scope="col">Moisture</th>
+                    <th scope="col">Soiltype</th>
+                <th scope="col">pH</th>
+
+                <th scope="col">Predicted Crop</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in dataset %}
+                    <tr>
+                    <th scope="row">{{ data.id }}</th>
+                    <td>{{ data.Temperature }}</td>
+                    <td>{{ data.Humidity }}</td>
+                    <td>{{ data.Moisture }}</td>
+                    <td>{{ data.Soiltype }}</td>
+                    <td>{{ data.pH }}</td>
+                        <td>{{ data.classification }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

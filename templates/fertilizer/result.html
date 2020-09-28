@@ -1,0 +1,45 @@
+{% extends "master/base.html" %}
+
+
+{% block main %}
+    <div class="container pt-5">
+        <div class="row">
+
+        <h1> Fertilizer Prediction Results:</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                <th scope="col">#</th>
+                      <th scope="col">Temperature</th>
+                <th scope="col">Humidity</th>
+                <th scope="col">Moisture</th>
+                    <th scope="col">Soil Type</th>
+                <th scope="col">Crop Type</th>
+                <th scope="col">Nitrogen</th>
+                <th scope="col">Potassium</th>
+                <th scope="col">Phosphorous</th>
+                <th scope="col">Predicted Fertilizer</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in dataset %}
+                    <tr>
+                    <th scope="row">{{ data.id }}</th>
+                    <td>{{ data.Temperature }}</td>
+                    <td>{{ data.Humidity }}</td>
+                    <td>{{ data.Moisture }}</td>
+                    <td>{{ data.Stype }}</td>
+                    <td>{{ data.Ctype }}</td>
+                    <td>{{ data.Nitrogen }}</td>
+                    <td>{{ data.Potassium }}</td>
+                    <td>{{ data.Phosphorous }}</td>
+                        <td>{{ data.classification }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
