@@ -1,5 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.urls import reverse
+
 import pandas as pd
 from .models import CropResults
 
