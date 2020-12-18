@@ -1,12 +1,16 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.urls import reverse
+
 import pandas as pd
 from django.urls import reverse
 #from .models import CropResults
 
-
 def index(request):
-    context={'name':'Crop1'}
+
+    context={'name':'Crop1'
+    context={'name':'Crop'}
+
     # return HttpResponseRedirect(reverse("Crop1:submit_prediction"))
     context.update({'crop_url': reverse("Crop1:submit_prediction")})
     return render(request,'Crop1/index.html',context)
