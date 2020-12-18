@@ -1,30 +1,32 @@
-{% extends "master/base.html" %}
+
+{% extends "master/base2.html" %}
 
 {% block main %}
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Prediction Results</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="color:#026440;">Here is the result </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h5>Prediction Input:</h5>
-                <div>Temperature: <span id="tm"></span></div>
-                <div>Humidity: <span id="hu"></span></div>
-                <div>Moisture: <span id="ms"></span></div>
-                <div>Soiltype: <span id="st"></span></div>
-                <div>pH: <span id="ph"></span></div>
+                <h5 style="color:#026440;">Prediction Input:</h5>
+                <div style="color:#026440;">Temperature: <span id="tm"></span></div>
+                <div style="color:#026440;">Humidity: <span id="hu"></span></div>
+                <div style="color:#026440;">Moisture: <span id="ms"></span></div>
+                <div style="color:#026440;">Soil Type: <span id="st"></span></div>
 
-                <h5 class="pt-3">Predicted Crop:</h5>
-                <div id="prediction1"></div>
+                <div style="color:#026440;">pH: <span id="p"></span></div>
+                <h5 class="pt-3" style="color:#026440;">Best Crop:</h5>
+                <div id="prediction"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a class="btn btn-primary" href="/results" role="button">View DB</a>
+
+
             </div>
         </div>
     </div>
@@ -33,25 +35,29 @@
 <div class="container pt-5">
     <div class="row justify-content-md-center">
         <div class="col-md-4">
-            <h1>Fertilizer Prediction</h1>
+
+            <h3 style="color:#026440;">Predict Best Crop</h3>
+            <br>
+            <br>
             <form action="" id="post-form">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="tempreture">Temperature</label>
+                   <div class="form-group" style="color:#037d50;">
+                    <label for="tempareture"><b>Temperature</b></label>
                     <input type="number" step="0.1"  class="form-control" id="Temperature" placeholder="" required>
                 </div>
-                <div class="form-group">
-                    <label for="humidity">Humidity</label>
+                <div class="form-group"  style="color:#037d50;">
+                    <label for="humidity"><b>Humidity</b></label>
                     <input type="number" step="0.1" class="form-control" id="Humidity" placeholder="" required>
                 </div>
-                <div class="form-group">
-                    <label for="moisture">Moisture</label>
+                <div class="form-group"  style="color:#037d50;">
+                    <label for="moisture"><b>Moisture</b></label>
                     <input type="number" step="0.1" class="form-control" id="Moisture" placeholder="" required>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="soiltype">Soiltype</label>
+                    <label for="soiltype" style="color:#026440;"><b>Soil Type</b></label>
                     <select name="soiltype" class="form-control" id="Stype" placeholder="" required>
 
                         <option value="1">Black</option>
@@ -63,10 +69,10 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="pH">pH</label>
-                    <select name="pH1" class="form-control" id="ph1" placeholder="" required>
+                    <label for="ph" style="color:#026440;"><b>pH</b></label>
+                    <select name="ph" class="form-control" id="Ph" placeholder="" required style="color:#026440;">
 
-                        <option value="1">Extremely acidic</option>
+                      <option value="1">Extremely acidic</option>
                          <option value="2">Moderately acidic</option>
                           <option value="3">Moderately alkaline</option>
                         <option value="4">Slightly acidic</option>
@@ -78,40 +84,48 @@
                         <option value="10">Very strongly alkaline</option>
 
 
-
                     </select>
 
                 </div>
-                <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Submit</button>
+                <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal"  style="background-color:#026440;" data-target="#exampleModal">Submit</button>
+                </div>
             </form>
+
         </div>
     </div>
 </div>
 
+
+
+
     <script>
+
+     var crop_url = '{{crop_url}}';
+
     $(document).on('submit', '#post-form',function(e){
         e.preventDefault();
         $.ajax({
             type:'POST',
-            url:'{% url "Crop1 :submit_prediction1" %}',
+              url:crop_url,
+
             data:{
                 Temperature:$('#Temperature').val(),
                 Humidity:$('#Humidity').val(),
                 Moisture:$('#Moisture').val(),
-                Soiltype:$('#Soiltype').val(),
-                pH:$('#pH').val(),
-
+                Stype:$('#Stype').val(),
+                Ph:$('#Ph').val(),
                 csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
                 action: 'post'
             },
             success:function(json) {
                 document.forms["post-form"].reset();
-                document.getElementById("prediction1").innerHTML = json['result']
+                document.getElementById("prediction").innerHTML = json['result']
                 document.getElementById("tm").innerHTML = json['Temperature']
                 document.getElementById("hu").innerHTML = json['Humidity']
                 document.getElementById("ms").innerHTML = json['Moisture']
-                document.getElementById("st").innerHTML = json['Soiltype']
-                document.getElementById("ph").innerHTML = json['pH']
+                document.getElementById("st").innerHTML = json['Stype']
+                document.getElementById("p").innerHTML = json['Ph']
+
 
             },
             error : function(xhr,errmsg,err) {
@@ -121,5 +135,4 @@
     })
 </script>
 {% endblock %}
-
 

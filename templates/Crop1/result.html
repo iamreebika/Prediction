@@ -1,4 +1,4 @@
-{% extends "master/base.html" %}
+{% extends "master/base2.html" %}
 
 
 {% block main %}
@@ -7,14 +7,14 @@
 
         <h1> Crop Prediction Results:</h1>
 
-            <table class="table">
+            <table class="table" style="background-color:#99d7b5">
                 <thead>
                 <tr>
                 <th scope="col">#</th>
                       <th scope="col">Temperature</th>
                 <th scope="col">Humidity</th>
                 <th scope="col">Moisture</th>
-                    <th scope="col">Soiltype</th>
+                    <th scope="col">Soil Type</th>
                 <th scope="col">pH</th>
 
                 <th scope="col">Predicted Crop</th>
@@ -27,8 +27,8 @@
                     <td>{{ data.Temperature }}</td>
                     <td>{{ data.Humidity }}</td>
                     <td>{{ data.Moisture }}</td>
-                    <td>{{ data.Soiltype }}</td>
-                    <td>{{ data.pH }}</td>
+                    <td>{{ data.Stype }}</td>
+                    <td>{{ data.Ph}}</td>
                         <td>{{ data.classification }}</td>
                     </tr>
                 {% endfor %}

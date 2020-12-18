@@ -26,6 +26,9 @@ def predict_chances(request):
         Potassium = float(request.POST.get('Potassium'))
         Phosphorous = float(request.POST.get('Phosphorous'))
 
+
+
+
         # Unpickle model
         import pickle
         model = pd.read_pickle(r"C:\Users\dell\Desktop\new_model.pickle")

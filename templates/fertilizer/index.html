@@ -1,3 +1,4 @@
+
 {% extends "master/base.html" %}
 
 {% block main %}
@@ -6,12 +7,12 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Prediction Results</h5>
+                <h5 class="modal-title" id="exampleModalLabel"  style="color:#026440;">Prediction Results</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="color:#026440;">
                 <h5>Prediction Input:</h5>
                 <div>Temperature: <span id="tm"></span></div>
                 <div>Humidity: <span id="hu"></span></div>
@@ -21,12 +22,12 @@
                 <div>Nitrogen: <span id="n"></span></div>
                 <div>Potassium: <span id="k"></span></div>
                 <div>Phosphorous: <span id="p"></span></div>
-                <h5 class="pt-3">Predicted Fertilizer:</h5>
+                <h5 class="pt-3">Best Fertilizer:</h5>
                 <div id="prediction"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a class="btn btn-primary" href="results" role="button">View DB</a>
+
             </div>
         </div>
     </div>
@@ -35,26 +36,27 @@
 <div class="container pt-5">
     <div class="row justify-content-md-center">
         <div class="col-md-4">
-            <h1>Fertilizer Prediction</h1>
+
+            <h3 style="color:#026440;">Fertilizer Prediction</h3>
             <form action="" id="post-form">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label for="tempreture">Temperature</label>
+                <div class="form-group" style="color:#037d50;">
+                    <label for="tempreture"><b>Temperature</b></label>
                     <input type="number" step="0.1"  class="form-control" id="Temperature" placeholder="" required>
                 </div>
-                <div class="form-group">
-                    <label for="humidity">Humidity</label>
+                <div class="form-group"  style="color:#037d50;">
+                    <label for="humidity"><b>Humidity</b></label>
                     <input type="number" step="0.1" class="form-control" id="Humidity" placeholder="" required>
                 </div>
-                <div class="form-group">
-                    <label for="moisture">Moisture</label>
+                <div class="form-group"  style="color:#037d50;">
+                    <label for="moisture"><b>Moisture</b></label>
                     <input type="number" step="0.1" class="form-control" id="Moisture" placeholder="" required>
                 </div>
 
 
-                <div class="form-group">
-                    <label for="soiltype">Soil Type</label>
-                    <select name="soiltype" class="form-control" id="Stype" placeholder="" required>
+                <div class="form-group"  style="color:#037d50;">
+                    <label for="soiltype"><b>Soil Type</b></label>
+                    <select name="soiltype" class="form-control" id="Stype" placeholder="" required  style="color:#037d50;">
 
                         <option value="1">Black</option>
                         <option value="2">Clayey</option>
@@ -64,9 +66,9 @@
 
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="croptype">Crop Type</label>
-                    <select name="croptype" class="form-control" id="Ctype" placeholder="" required>
+                <div class="form-group" style="color:#037d50;">
+                    <label for="croptype"><b>Crop Type</b></label>
+                    <select name="croptype" class="form-control" id="Ctype" placeholder="" required  style="color:#037d50;">
 
                         <option value="1">Barley</option>
                          <option value="2">Cotton</option>
@@ -84,25 +86,29 @@
                     </select>
 
                 </div>
-                <div class="form-group">
-                    <label for="nitrogen">Nitrogen</label>
+                <div class="form-group"  style="color:#037d50;">
+                    <label for="nitrogen"><b>Nitrogen</b></label>
                     <input type="number" step="0.1" class="form-control" id="Nitrogen" placeholder="" required>
                 </div>
-                <div class="form-group">
-                    <label for="potassium">Potassium</label>
+                <div class="form-group"  style="color:#037d50;">
+                    <label for="potassium"><b>Potassium</b></label>
                     <input type="number" step="0.1" class="form-control" id="Potassium" placeholder="" required>
                 </div>
-                <div class="form-group">
-                    <label for="phosphorous">Phosphorous</label>
+                <div class="form-group"  style="color:#037d50;">
+                    <label for="phosphorous"><b>Phosphorous</b></label>
                     <input type="number" step="0.1" class="form-control" id="Phosphorous" placeholder="" required>
                 </div>
-                <button type="submit" value="Submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Submit</button>
+                <button type="submit" value="Submit" class="btn btn-primary" style="background-color:#026440;" data-toggle="modal" data-target="#exampleModal">Submit</button>
             </form>
         </div>
     </div>
 </div>
 
+
+
+
     <script>
+
     $(document).on('submit', '#post-form',function(e){
         e.preventDefault();
         $.ajax({

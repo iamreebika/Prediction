@@ -1,17 +1,19 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 import pandas as pd
-from .models import CropResults
-
-
+from django.urls import reverse
+#from .models import CropResults
 
 
 def index(request):
-    context={'name':'Crop'}
+    context={'name':'Crop1'}
+    # return HttpResponseRedirect(reverse("Crop1:submit_prediction"))
+    context.update({'crop_url': reverse("Crop1:submit_prediction")})
     return render(request,'Crop1/index.html',context)
 
 
-def predict_chances1(request):
+
+def predict_chances(request):
 
     if request.POST.get('action') == 'post':
 
@@ -21,27 +23,34 @@ def predict_chances1(request):
 
         Moisture = float(request.POST.get('Moisture'))
 
-        Soiltype =float(request.POST.get('Soiltype'))
-        pH = float(request.POST.get('pH'))
+        Stype =float(request.POST.get('Stype'))
+        Ph = float(request.POST.get('Ph'))
+
+
 
 
         # Unpickle model
         import pickle
-        model = pd.read_pickle(r"C:\Users\dell\Desktop\new_model.pickle")
+        model = pd.read_pickle(r"C:\Users\dell\Desktop\new_model1.pickle")
 
 
         # Make prediction
-        result = model.predict([[Soiltype, pH, Temperature, Humidity, Moisture]])
+        result = model.predict([[Stype, Ph, Temperature, Humidity, Moisture]])
 
         classification = result[0]
 
-        CropResults.objects.create(Soiltype=Soiltype, pH=pH,Temperature=Temperature,Humidity=Humidity,Moisture=Moisture,classification=classification)
+        #FreResults.objects.create(Stype=Stype, Ctype=Ctype,Temperature=Temperature,Humidity=Humidity,Moisture=Moisture,Potassium=Potassium,Phosphorous=Phosphorous,Nitrogen=Nitrogen,classification=classification)
 
 
-        return JsonResponse({'result': classification,'Soiltype':Soiltype, 'pH':pH,'Temperature':Temperature,'Humidity':Humidity,'Moisture':Moisture },
+        return JsonResponse({'result': classification,'Stype':Stype, 'Ph':Ph,'Temperature':Temperature,'Humidity':Humidity,'Moisture':Moisture },
                             safe=False)
 
-def view_results(request):
-  data={"dataset": CropResults.objects.all()}
 
-  return render(request,'Crop1/result.html',data)
+#def view_results(request):
+
+       #data={"dataset": CropResults.objects.all()}
+       #return render(request,'Crop1/result.html',data)
+
+
+
+

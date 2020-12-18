@@ -6,7 +6,7 @@ app_name = "fertilizer"
 
 
 urlpatterns=[
-    path('', findex, name='fertilizer'),
+    path('', findex, name='fertilizer-name'),
     path('fertilizer/',predict_chances,name='submit_prediction'),
-    path('results/',view_results,name='results'),
+    path('fertilizer/results/',view_results,name='results'),
 ]

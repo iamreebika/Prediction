@@ -1,4 +1,5 @@
 from django.contrib import admin
-from .models import CropResults
 
-admin.site.register(CropResults)
+from .models import CropResult
+
+admin.site.register(CropResult)
