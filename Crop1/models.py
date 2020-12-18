@@ -1,21 +1,15 @@
 from django.db import models
-from django.urls import reverse
+
+class CropResult(models.Model):
+    Temperature=models.FloatField(blank=True)
+
+    Humidity =models.FloatField(blank=True)
 
 
-class CropResults(models.Model):
-    Temperature=models.FloatField()
+    Moisture = models.FloatField(blank=True)
 
-    Humidity =models.FloatField()
-
-
-    Moisture = models.FloatField()
-
-    Soiltype =models.FloatField()
-    pH = models.FloatField()
-
+    Stype =models.FloatField(blank=True)
+    Ctype = models.FloatField(blank=True)
+    Ph = models.FloatField(blank=True)
 
     classification = models.CharField(max_length =100)
-
-    def get_absolute_url(self):
-        return reverse("Crop1:Crop1-index",kwargs={"id":self.id})
-
