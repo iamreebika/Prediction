@@ -102,20 +102,12 @@
 
 
      var crop_url = '{{crop_url}}';
-
-    var crop_url = '{{crop_url}}';
-
-
     $(document).on('submit', '#post-form',function(e){
         e.preventDefault();
         $.ajax({
             type:'POST',
 
               url:crop_url,
-
-
-            url:'{% url "crop_url" %}',
-
             data:{
                 Temperature:$('#Temperature').val(),
                 Humidity:$('#Humidity').val(),
