@@ -8,7 +8,6 @@ from django.urls import reverse
 
 def index(request):
 
-    context={'name':'Crop1'
     context={'name':'Crop'}
 
     # return HttpResponseRedirect(reverse("Crop1:submit_prediction"))
@@ -43,17 +42,14 @@ def predict_chances(request):
 
         classification = result[0]
 
-        #FreResults.objects.create(Stype=Stype, Ctype=Ctype,Temperature=Temperature,Humidity=Humidity,Moisture=Moisture,Potassium=Potassium,Phosphorous=Phosphorous,Nitrogen=Nitrogen,classification=classification)
-
-
         return JsonResponse({'result': classification,'Stype':Stype, 'Ph':Ph,'Temperature':Temperature,'Humidity':Humidity,'Moisture':Moisture },
                             safe=False)
 
 
-#def view_results(request):
+def view_result(request):
 
-       #data={"dataset": CropResults.objects.all()}
-       #return render(request,'Crop1/result.html',data)
+       data={"dataset": CropResults.objects.all()}
+       return render(request,'Crop1/result.html',data)
 
 
 
